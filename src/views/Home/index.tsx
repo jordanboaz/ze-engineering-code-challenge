@@ -28,8 +28,8 @@ const Home = () => {
   // console.log(loadingCategories, errorCategories, categoriesData);
 
   return (
-    <View style={{ padding: 50 }}>
-      <Text>Hello world</Text>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
     </View>
   );
 };

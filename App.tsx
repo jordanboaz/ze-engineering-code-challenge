@@ -3,7 +3,7 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-import Home from './src/views/Home';
+import Router from './src/routes';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -14,7 +14,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <SafeAreaView style={{ flex: 1 }}>
-        <Home />
+        <Router />
       </SafeAreaView>
     </ApolloProvider>
   );
