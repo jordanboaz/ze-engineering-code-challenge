@@ -13,13 +13,13 @@ import { Props, Item as ItemType } from './types';
 const SelectField = (props: Props) => {
   const renderItem = ({ item }: { item: ItemType }) => {
     return (
-      <Item>
+      <Item onPress={() => props.onPress(item)}>
         <IconContainer>
           <></>
         </IconContainer>
         <TextContainer>
-          <Title>{item.title}</Title>
-          <Subtitle>{item.subtitle}</Subtitle>
+          <Title numberOfLines={1}>{item.title}</Title>
+          <Subtitle numberOfLines={1}>{item.subtitle}</Subtitle>
         </TextContainer>
       </Item>
     );
@@ -31,7 +31,7 @@ const SelectField = (props: Props) => {
         <ScrollContainer
           renderItem={renderItem}
           data={props.data}
-          keyExtractor={(item: unknown) => String(item.title)}
+          keyExtractor={(item: unknown) => String(item.id)}
         />
       </Container>
     );

@@ -11,7 +11,7 @@ const Container = styled(View)`
 const ScrollContainer = styled(FlatList).attrs({
   contentContainerStyle: { flexGrow: 1 },
 })`
-  background: white;
+  /* background: white; */
 `;
 
 const Item = styled(TouchableOpacity)`
@@ -22,7 +22,7 @@ const Item = styled(TouchableOpacity)`
   align-items: center;
   border-bottom-color: ${theme.colors.grey.one};
   margin-bottom: 1px;
-  border-bottom-width: ${StyleSheet.hairlineWidth};
+  border-bottom-width: ${StyleSheet.hairlineWidth}px;
   border-style: solid;
   background: white;
 `;
