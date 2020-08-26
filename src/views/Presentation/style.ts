@@ -20,6 +20,9 @@ const SearchBarContainer = styled(Animated.View)`
   padding: 8px;
   margin-bottom: 20px;
   elevation: 3;
+    shadow-offset: 0px 0px ;
+  shadow-opacity: 0.2;
+  shadow-radius: 3px;
 `;
 
 const IconContainer = styled(View)`

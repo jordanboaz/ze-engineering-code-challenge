@@ -8,9 +8,9 @@ const Stack = createStackNavigator();
 function Route() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Presentation" headerMode="none">
+      <Stack.Navigator initialRouteName="Home" headerMode="none">
         <Stack.Screen name="Presentation" component={Presentation} />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={Home} headerMode="none" />
         <Stack.Screen name="Details" component={Details} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -51,7 +51,7 @@ const Presentation = () => {
   const animateHeaderToTop = () => {
     if (!hasAnimatedHeader) {
       Animated.timing(headerAnimation, {
-        duration: 300,
+        duration: 500,
         toValue: 1,
         useNativeDriver: true,
       }).start(() => {
@@ -79,7 +79,7 @@ const Presentation = () => {
             {
               translateY: headerAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [theme.size.screenHeigth / 2, 0],
+                outputRange: [(theme.size.screenHeigth / 3), 0],
               }),
             },
           ],
