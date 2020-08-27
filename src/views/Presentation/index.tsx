@@ -46,7 +46,7 @@ const Presentation = (props: Props) => {
   };
 
   const throttledSearch = useCallback(
-    throttle(onSearch, 3000, { leading: true, trailing: true }),
+    throttle(onSearch, 2000, { leading: true, trailing: true }),
     []
   );
 

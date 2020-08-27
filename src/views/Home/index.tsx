@@ -67,7 +67,7 @@ const Home = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    if (!loadingAddress && dataAddress && dataAddress?.pocSearch) {
+    if (!loadingAddress && dataAddress && dataAddress?.pocSearch.length) {
       getPOCID({
         variables: {
           id: dataAddress.pocSearch[0].id,
@@ -150,10 +150,10 @@ const Home = (props: Props) => {
           }}
         />
         <View style={{ padding: 16, paddingTop: 32 }}>
-          <SearchBar value={searchProduct} onChangeText={setSearchProduct} />
+          <SearchBar value={searchProduct} onChangeText={setSearchProduct}  />
         </View>
       </HeaderAbsolute>
-      <Content onScroll={onScroll}>
+      <Content onScroll={onScroll} scrollEventThrottle={16}>
         <Carroussel data={mockCarroussel} />
 
         <Divider />

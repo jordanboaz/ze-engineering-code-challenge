@@ -8,6 +8,7 @@ const SearchBarComponent = (props: Props) => {
     <SearchBarContainer style={props.animation}>
       <IconContainer>{props.icon ? props.icon() : <></>}</IconContainer>
       <SearchBar
+        autoCorrect={false}
         value={props.value}
         placeholder={props.placeholder}
         onFocus={props.onFocus}

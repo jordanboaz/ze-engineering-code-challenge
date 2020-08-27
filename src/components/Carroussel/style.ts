@@ -29,7 +29,7 @@ const DotsContainer = styled(View)`
 const Dot = styled(View)``;
 
 const BoxContainer = styled(View)`
-  width: ${theme.size.screenWidth};
+  width: ${theme.size.screenWidth}px;
   padding: 20px;
   background: white;
 `;

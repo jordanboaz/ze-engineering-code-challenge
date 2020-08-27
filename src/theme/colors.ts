@@ -5,8 +5,13 @@ const grey = {
   three: '#808080',
 };
 
+const yellow = {
+  zero: '#FFCC00'
+}
+
 const colors = {
   grey,
+  yellow
 };
 
 export { colors };
