@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import Constants from 'expo-constants';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
@@ -12,10 +13,11 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
-    <ApolloProvider client={client}>
-      <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+      <StatusBar style="auto" />
+      <ApolloProvider client={client}>
         <Router />
-      </SafeAreaView>
-    </ApolloProvider>
+      </ApolloProvider>
+    </SafeAreaView>
   );
 }

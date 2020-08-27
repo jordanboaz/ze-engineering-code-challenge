@@ -2,15 +2,16 @@ import React, { useState, useCallback } from 'react';
 import { Animated } from 'react-native';
 import {
   Container,
-  SearchBarContainer,
-  IconContainer,
-  SearchBar,
+  // SearchBarContainer,
+  // IconContainer,
+  // SearchBar,
 } from './style';
 import { Geocoder } from '../../services/geoCoderservice';
 import theme from '../../theme';
 import SelectField from '../../components/SelectField';
 import { Item as addressType } from '../../components/SelectField/types';
 import throttle from 'lodash.throttle';
+import SearchBar from '../../components/SearchBar';
 
 const Presentation = () => {
   const [searchField, setSearchField] = useState('');
@@ -73,28 +74,22 @@ const Presentation = () => {
 
   return (
     <Container>
-      <SearchBarContainer
-        style={{
+      <SearchBar
+        onChangeText={onChangeSearch}
+        onFocus={animateHeaderToTop}
+        value={searchField}
+        placeholder="Inserir endereço com número"
+        animation={{
           transform: [
             {
               translateY: headerAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [(theme.size.screenHeigth / 3), 0],
+                outputRange: [theme.size.screenHeigth / 3, 0],
               }),
             },
           ],
         }}
-      >
-        <IconContainer>
-          <></>
-        </IconContainer>
-        <SearchBar
-          value={searchField}
-          placeholder="Inserir endereço com número"
-          onFocus={animateHeaderToTop}
-          onChangeText={onChangeSearch}
-        />
-      </SearchBarContainer>
+      />
       <SelectField data={addresses} onPress={onSelectAddress} />
     </Container>
   );

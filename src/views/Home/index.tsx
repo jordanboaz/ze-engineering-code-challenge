@@ -6,17 +6,18 @@ import { Poc, Product, ProductVariants, Category } from '../../types';
 import { searchAddress } from '../../services/searchAddressService';
 import { categories } from '../../services/categoriesService';
 import { getPoc } from '../../services/pocService';
-// import Carroussel from '../../components/Carroussel';
+import Carroussel from '../../components/Carroussel';
 import FilterComponent from '../../components/Grid';
 import Trail from '../../components/Trail';
-const options = [
-  { title: 'Ficção' },
-  { title: 'Comédia' },
-  { title: 'Ajuda' },
-  { title: 'Informática' },
-  { title: 'Direito' },
-  { title: 'Economia' },
+
+import Splash from '../../assets/splash.png';
+const mockCarroussel = [
+  { id: 1, img: Splash },
+  { id: 2, img: Splash },
+  { id: 3, img: Splash },
+  { id: 4, img: Splash },
 ];
+
 const Home = () => {
   const [trailsList, setTrailsList] = useState<
     { title: string; products: Product[] }[] | never
@@ -103,7 +104,9 @@ const Home = () => {
 
   return (
     <ScrollView>
-      {/* <Carroussel data={[1, 2, 3, 4, 5]} /> */}
+      <Carroussel data={mockCarroussel} />
+
+      <Divider />
 
       <FilterComponent
         data={loadingCategories ? [] : dataCategories.allCategory}
