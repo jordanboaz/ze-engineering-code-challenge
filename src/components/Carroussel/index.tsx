@@ -12,14 +12,18 @@ import SquaredImage from '../../assets/splash.png';
 
 const Carroussel = (props: Props) => {
   const renderItems = (data: Item[]) => {
-    return data.map((eachItem) => {
-      console.log(eachItem);
-      return (
-        <BoxContainer key={eachItem.id}>
-          <ImageBox source={eachItem.img} />
-        </BoxContainer>
-      );
-    });
+    if (data.length) {
+      return data.map((eachItem) => {
+        console.log(eachItem);
+        return (
+          <BoxContainer key={eachItem.id}>
+            <ImageBox source={eachItem.img} />
+          </BoxContainer>
+        );
+      });
+    }
+
+    return <></>;
   };
 
   const renderDotsContainer = () => {

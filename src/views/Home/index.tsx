@@ -1,7 +1,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, View, Animated } from 'react-native';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { Divider } from './style';
+import {
+  Container,
+  Content,
+  HeaderAbsolute,
+  HeaderPaint,
+  Divider,
+} from './style';
+import Constants from 'expo-constants';
 import { Poc, Product, ProductVariants, Category } from '../../types';
 import { searchAddress } from '../../services/searchAddressService';
 import { categories } from '../../services/categoriesService';
@@ -9,8 +16,10 @@ import { getPoc } from '../../services/pocService';
 import Carroussel from '../../components/Carroussel';
 import FilterComponent from '../../components/Grid';
 import Trail from '../../components/Trail';
+import SearchBar from '../../components/SearchBar';
 
 import Splash from '../../assets/splash.png';
+import theme from '../../theme';
 const mockCarroussel = [
   { id: 1, img: Splash },
   { id: 2, img: Splash },
@@ -19,9 +28,13 @@ const mockCarroussel = [
 ];
 
 const Home = () => {
+  const [searchProduct, setSearchProduct] = useState('');
   const [trailsList, setTrailsList] = useState<
     { title: string; products: Product[] }[] | never
   >([]);
+
+  const scrollAnimated = new Animated.Value(0);
+
   const {
     loading: loadingCategories,
     error: errorCategories,
@@ -102,19 +115,40 @@ const Home = () => {
     });
   };
 
+  const onScroll = Animated.event(
+    [{ nativeEvent: { contentOffset: { y: scrollAnimated } } }],
+    { useNativeDriver: false }
+  );
+
   return (
-    <ScrollView>
-      <Carroussel data={mockCarroussel} />
+    <Container>
+      <HeaderAbsolute>
+        <HeaderPaint
+          style={{
+            opacity: scrollAnimated.interpolate({
+              inputRange: [0, theme.size.screenHeigth * 0.1],
+              outputRange: [1, 0],
+              extrapolate: 'clamp',
+            }),
+          }}
+        />
+        <View style={{ padding: 16, paddingTop: 32 }}>
+          <SearchBar value={searchProduct} onChangeText={setSearchProduct} />
+        </View>
+      </HeaderAbsolute>
+      <Content onScroll={onScroll}>
+        <Carroussel data={mockCarroussel} />
 
-      <Divider />
+        <Divider />
 
-      <FilterComponent
-        data={loadingCategories ? [] : dataCategories.allCategory}
-        numColumns={2}
-      />
-      <Divider />
-      {renderTrailsList()}
-    </ScrollView>
+        <FilterComponent
+          data={loadingCategories ? [] : dataCategories.allCategory}
+          numColumns={2}
+        />
+        <Divider />
+        {renderTrailsList()}
+      </Content>
+    </Container>
   );
 };
 
