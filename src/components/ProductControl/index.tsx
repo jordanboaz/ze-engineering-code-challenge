@@ -70,7 +70,7 @@ const ProductControl = (props: Props) => {
           </Unit>
       })}
     </UnitsControlContainer>
-      <SubmitButton>
+      <SubmitButton onPress={() => props.onSubmit(value)}>
     <SubmitText>{`Adicionar (${value})`}</SubmitText>
     <SubmitText>{props.price ? `R$ ${(props.price * value).toFixed(2)}` : ''}</SubmitText>
       </SubmitButton>
