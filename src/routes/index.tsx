@@ -10,7 +10,7 @@ function Route() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" headerMode="none">
         <Stack.Screen name="Presentation" component={Presentation} />
-        <Stack.Screen name="Home" component={Home} headerMode="none" />
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Details" component={Details} />
       </Stack.Navigator>
     </NavigationContainer>
