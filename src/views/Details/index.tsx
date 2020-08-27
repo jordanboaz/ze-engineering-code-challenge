@@ -2,11 +2,18 @@ import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import ProductControl from '../../components/ProductControl';
 import ProductViewer from '../../components/ProductViewer';
+import { useSelector, useDispatch } from 'react-redux';
+import { addProduct } from '../../store/actions/cart'
 
-const Presentation = () => {
+const Details = () => {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  console.log(cart)
 
   const onSubmit = (x: any) => {
     console.log(x);
+    dispatch(addProduct(x));
   }
   return (
     <ScrollView style={{ flex: 1 }}>
@@ -24,4 +31,4 @@ const Presentation = () => {
   );
 };
 
-export default Presentation;
+export default Details;
