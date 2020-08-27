@@ -24,3 +24,8 @@ export interface Category {
   title: string;
   id: number;
 }
+
+export interface Location {
+  lat: number;
+  lng: number;
+}

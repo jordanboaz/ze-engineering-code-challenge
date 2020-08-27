@@ -1,5 +1,11 @@
 import styled from 'styled-components/native';
-import { View, Text, FlatList, Image as RNImage } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  Image as RNImage,
+  TouchableOpacity,
+} from 'react-native';
 
 import theme from '../../theme';
 
@@ -18,7 +24,7 @@ export const TrailContainer = styled(FlatList).attrs({
   contentContainerStyle: { flexGrow: 1, paddingVertical: 15, paddingRight: 20 },
 })``;
 
-export const Item = styled(View)`
+export const Item = styled(TouchableOpacity)`
   flex: 0;
   width: ${ItemWidth}px
   /* height: 100%; */

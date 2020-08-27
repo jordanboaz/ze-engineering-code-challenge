@@ -7,7 +7,7 @@ const Trail = (props: Props) => {
   const renderItem = ({ item }: { item: Product }) => {
     const imageUrl = item.images[0]?.url;
     return (
-      <Style.Item>
+      <Style.Item onPress={() => props.onPress(item)}>
         <Style.ImageContainer>
           {imageUrl && (
             <Style.Image source={{ uri: imageUrl }} resizeMode="cover" />

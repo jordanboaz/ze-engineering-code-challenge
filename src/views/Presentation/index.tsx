@@ -12,8 +12,9 @@ import SelectField from '../../components/SelectField';
 import { Item as addressType } from '../../components/SelectField/types';
 import throttle from 'lodash.throttle';
 import SearchBar from '../../components/SearchBar';
+import { Props } from './types';
 
-const Presentation = () => {
+const Presentation = (props: Props) => {
   const [searchField, setSearchField] = useState('');
   const [addresses, setAddresses] = useState([]);
   const [errorFetching, setErrorFetching] = useState(false);
@@ -68,8 +69,9 @@ const Presentation = () => {
     }
   };
 
-  const onSelectAddress = (adressSelected: addressType) => {
-    console.log(adressSelected);
+  const onSelectAddress = (addressSelected: addressType) => {
+    console.log(addressSelected);
+    props.navigation.navigate('Home', { address: addressSelected });
   };
 
   return (

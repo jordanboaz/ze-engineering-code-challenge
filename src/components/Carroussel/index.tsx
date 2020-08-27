@@ -14,7 +14,6 @@ const Carroussel = (props: Props) => {
   const renderItems = (data: Item[]) => {
     if (data.length) {
       return data.map((eachItem) => {
-        console.log(eachItem);
         return (
           <BoxContainer key={eachItem.id}>
             <ImageBox source={eachItem.img} />
@@ -38,7 +37,7 @@ const Carroussel = (props: Props) => {
   return (
     <Container>
       <ScrollContainer>{renderItems(props.data)}</ScrollContainer>
-      {renderDotsContainer()}
+      {/* {renderDotsContainer()} */}
     </Container>
   );
 };

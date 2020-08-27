@@ -3,6 +3,7 @@ export interface Props {
   data: Product[];
   title: string;
   footer?: Function;
+  onPress?: any;
 }
 
 export interface Item {

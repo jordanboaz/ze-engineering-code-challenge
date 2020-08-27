@@ -17,7 +17,7 @@ import Carroussel from '../../components/Carroussel';
 import FilterComponent from '../../components/Grid';
 import Trail from '../../components/Trail';
 import SearchBar from '../../components/SearchBar';
-
+import { Props } from './types';
 import Splash from '../../assets/splash.png';
 import theme from '../../theme';
 const mockCarroussel = [
@@ -27,7 +27,7 @@ const mockCarroussel = [
   { id: 4, img: Splash },
 ];
 
-const Home = () => {
+const Home = (props: Props) => {
   const [searchProduct, setSearchProduct] = useState('');
   const [trailsList, setTrailsList] = useState<
     { title: string; products: Product[] }[] | never
@@ -41,31 +41,42 @@ const Home = () => {
     data: dataCategories,
   } = useQuery(categories);
 
-  const { loading: loadingPoc, error: errorPoc, data: pocData } = useQuery(
-    getPoc,
-    {
-      variables: {
-        id: '532',
-        search: '',
-        categoryId: null,
-      },
-    }
+  const [
+    getAddress,
+    { loading: loadingAddress, data: dataAddress },
+  ] = useLazyQuery(searchAddress);
+
+  const [getPOCID, { loading: loadingPoc, data: pocData }] = useLazyQuery(
+    getPoc
   );
 
-  const {
-    loading: loadingAddress,
-    error: errorAddress,
-    data: addresspocData,
-  } = useQuery(searchAddress, {
-    variables: {
-      algorithm: 'NEAREST',
-      lat: '-23.632919',
-      long: '-46.699453',
-      now: '2017-08-01T20:00:00.000Z',
-    },
-  });
+  console.log('got address', dataAddress, loadingAddress);
+  // console.log('got id', loadingPoc, pocData);
 
-  // console.log(loadingPoc, errorPoc, pocData );
+  useEffect(() => {
+    const { location } = props.route.params.address;
+
+    getAddress({
+      variables: {
+        algorithm: 'NEAREST',
+        lat: String(location.lat),
+        long: String(location.lng),
+        now: new Date().toISOString(),
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!loadingAddress && dataAddress && dataAddress?.pocSearch) {
+      getPOCID({
+        variables: {
+          id: dataAddress.pocSearch[0].id,
+          search: '',
+          categoryId: null,
+        },
+      });
+    }
+  }, [dataAddress, loadingAddress]);
 
   useEffect(() => {
     arrangeProductsInCategories();
@@ -102,6 +113,11 @@ const Home = () => {
   // console.log(loadingCategories, errorCategories, categoriesData);
   // console.log(loadingAddress, errorAddress, addresspocData);
 
+  const onSelectProduct = (product: Product) => {
+    props.navigation.navigate('Details');
+    console.log('selected', product);
+  };
+
   const renderTrailsList = () => {
     return trailsList.map((eachTrail) => {
       return (
@@ -109,6 +125,7 @@ const Home = () => {
           title={eachTrail.title}
           key={eachTrail.title}
           data={eachTrail.products}
+          onPress={onSelectProduct}
           footer={() => <Divider />}
         />
       );
