@@ -8,7 +8,7 @@ const ItemWidth = theme.size.screenWidth * 0.3;
 export const Container = styled(View)`
   width: 100%;
   height: ${theme.size.screenHeigth * 0.4}px;
-  padding: 20px 0 0;
+  padding: 20px 0 0 0;
   background: white;
 `;
 

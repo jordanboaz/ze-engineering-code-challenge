@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { ScrollView, Text } from 'react-native';
 import { useLazyQuery, useQuery } from '@apollo/client';
+import { Divider } from './style';
 import { Poc, Product, ProductVariants, Category } from '../../types';
 import { searchAddress } from '../../services/searchAddressService';
 import { categories } from '../../services/categoriesService';
@@ -94,6 +95,7 @@ const Home = () => {
           title={eachTrail.title}
           key={eachTrail.title}
           data={eachTrail.products}
+          footer={() => <Divider />}
         />
       );
     });
@@ -107,7 +109,7 @@ const Home = () => {
         data={loadingCategories ? [] : dataCategories.allCategory}
         numColumns={2}
       />
-
+      <Divider />
       {renderTrailsList()}
     </ScrollView>
   );

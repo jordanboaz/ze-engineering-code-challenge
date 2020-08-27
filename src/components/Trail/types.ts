@@ -2,6 +2,7 @@ import { Product } from '../../types';
 export interface Props {
   data: Product[];
   title: string;
+  footer?: Function;
 }
 
 export interface Item {

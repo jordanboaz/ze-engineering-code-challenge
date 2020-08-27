@@ -34,17 +34,20 @@ const Trail = (props: Props) => {
 
   if (props?.data?.length) {
     return (
-      <Style.Container>
-        <Style.Title>{props.title}</Style.Title>
-        <Style.TrailContainer
-          renderItem={renderItem}
-          data={props.data}
-          initialNumToRender={5}
-          keyExtractor={(item: any, index: number) =>
-            String(`${item.id}-${index}`)
-          }
-        />
-      </Style.Container>
+      <>
+        <Style.Container>
+          <Style.Title>{props.title}</Style.Title>
+          <Style.TrailContainer
+            renderItem={renderItem}
+            data={props.data}
+            initialNumToRender={5}
+            keyExtractor={(item: any, index: number) =>
+              String(`${item.id}-${index}`)
+            }
+          />
+        </Style.Container>
+        {props.footer && props.footer()}
+      </>
     );
   }
 
