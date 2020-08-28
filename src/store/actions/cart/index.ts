@@ -1,10 +1,10 @@
-import { ADD_PRODUCT } from '../../types'
+import { ADD_PRODUCT, ProductDispatch } from '../../types';
 
-const addProduct = (product) => {
+const addProduct = (product: ProductDispatch) => {
   return {
     type: ADD_PRODUCT,
-    payload: {id: 'carro', amount: 5}
-  }
-}
+    payload: { ...product },
+  };
+};
 
 export { addProduct };

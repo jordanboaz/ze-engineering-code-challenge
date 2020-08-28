@@ -1,26 +1,35 @@
-import { ADD_PRODUCT } from '../../types'
-const INITIAL_STATE = {
-  products: []
+import { ADD_PRODUCT, ProductDispatch } from '../../types';
+
+interface Action {
+  type: string;
+  payload: any;
 }
 
-const cart = (state = INITIAL_STATE, action) => {
-  switch (action.type){
+const INITIAL_STATE: { products: ProductDispatch[] } = {
+  products: [],
+};
+
+const cart = (state = INITIAL_STATE, action: Action) => {
+  switch (action.type) {
     case ADD_PRODUCT:
       const { id, amount } = action.payload;
 
-      // let prod = {}
-      const indexProductInState = state.products.findIndex((el) => el.id === id);
-      // if(indexProductInState){
-      //   const productInState = state.products[indexProductInState];
-      //   prod = {...productInState, amount: productInState.amount + quantity};
-      // }
+      const products = [...state.products];
 
-      console.log(id, amount, indexProductInState)
+      const indexOfProductInState = products.findIndex((el) => el.id === id);
 
-      return {...state}
+      if (indexOfProductInState === -1) {
+        //Product does not exist on cart
+        return { ...state, products: [...products, { ...action.payload }] };
+      } else {
+        products[indexOfProductInState].amount =
+          products[indexOfProductInState].amount + amount;
+        return { ...state, products: [...products] };
+      }
+
     default:
       return state;
   }
-}
+};
 
 export { cart };

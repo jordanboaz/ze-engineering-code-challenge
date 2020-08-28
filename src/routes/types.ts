@@ -1,4 +1,4 @@
-import { Location } from '../types';
+import { Location, Product } from '../types';
 
 export type RootStackParamList = {
   Presentation: undefined;
@@ -10,5 +10,7 @@ export type RootStackParamList = {
       id: string;
     };
   };
-  Details: undefined;
+  Details: {
+    product: Product;
+  };
 };
