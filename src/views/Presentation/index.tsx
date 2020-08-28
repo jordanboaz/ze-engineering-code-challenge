@@ -1,14 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import { Animated } from 'react-native';
-import {
-  Container,
-  // SearchBarContainer,
-  // IconContainer,
-  // SearchBar,
-} from './style';
+import { Container, Logo } from './style';
 import { EvilIcons } from '@expo/vector-icons';
 import { Geocoder } from '../../services/geoCoderservice';
 import theme from '../../theme';
+import Zelogo from '../../assets/png/zelogo.png';
 import SelectField from '../../components/SelectField';
 import { Item as addressType } from '../../components/SelectField/types';
 import throttle from 'lodash.throttle';
@@ -77,6 +73,20 @@ const Presentation = (props: Props) => {
 
   return (
     <Container>
+      <Logo
+        source={Zelogo}
+        resizeMode="contain"
+        // style={{
+        //   transform: [
+        //     {
+        //       translateY: headerAnimation.interpolate({
+        //         inputRange: [0, 1],
+        //         outputRange: [0, theme.size.screenHeigth / 3],
+        //       }),
+        //     },
+        //   ],
+        // }}
+      />
       <SearchBar
         onChangeText={onChangeSearch}
         onFocus={animateHeaderToTop}
