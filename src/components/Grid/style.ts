@@ -42,6 +42,7 @@ const Item = styled(TouchableOpacity)<{ index: number }>`
 
 const IconContainer = styled(View)`
   margin: 0 10px 0 20px;
+  min-width: 20px;
 `;
 
 // const IconPlaceHolder = styled(BookSvg).attrs({
