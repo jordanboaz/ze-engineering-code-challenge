@@ -1,14 +1,18 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { ScrollView, View, Animated } from 'react-native';
 import { useLazyQuery, useQuery } from '@apollo/client';
+import { AntDesign } from '@expo/vector-icons';
 import {
   Container,
   Content,
   HeaderAbsolute,
   HeaderPaint,
+  CartRow,
+  CartButton,
+  CartText,
   Divider,
 } from './style';
-import Constants from 'expo-constants';
+import { useSelector } from 'react-redux';
 import { Poc, Product, ProductVariants, Category } from '../../types';
 import { searchAddress } from '../../services/searchAddressService';
 import { categories } from '../../services/categoriesService';
@@ -32,6 +36,9 @@ const Home = (props: Props) => {
   const [trailsList, setTrailsList] = useState<
     { title: string; products: Product[] }[] | never
   >([]);
+  const cart = useSelector((state) => state.cart);
+
+  console.log(cart);
 
   const scrollAnimated = new Animated.Value(0);
 
@@ -50,7 +57,7 @@ const Home = (props: Props) => {
     getPoc
   );
 
-  console.log('got address', dataAddress, loadingAddress);
+  // console.log('got address', dataAddress, loadingAddress);
   // console.log('got id', loadingPoc, pocData);
 
   useEffect(() => {
@@ -114,7 +121,7 @@ const Home = (props: Props) => {
   // console.log(loadingAddress, errorAddress, addresspocData);
 
   const onSelectProduct = (product: Product) => {
-    props.navigation.navigate('Details');
+    props.navigation.navigate('Details', { product: product });
     console.log('selected', product);
   };
 
@@ -143,14 +150,14 @@ const Home = (props: Props) => {
         <HeaderPaint
           style={{
             opacity: scrollAnimated.interpolate({
-              inputRange: [0, theme.size.screenHeigth * 0.1],
+              inputRange: [0, theme.size.screenHeigth * 0.2],
               outputRange: [1, 0],
               extrapolate: 'clamp',
             }),
           }}
         />
         <View style={{ padding: 16, paddingTop: 32 }}>
-          <SearchBar value={searchProduct} onChangeText={setSearchProduct}  />
+          <SearchBar value={searchProduct} onChangeText={setSearchProduct} />
         </View>
       </HeaderAbsolute>
       <Content onScroll={onScroll} scrollEventThrottle={16}>
@@ -165,6 +172,17 @@ const Home = (props: Props) => {
         <Divider />
         {renderTrailsList()}
       </Content>
+      {cart?.products?.length > 0 && (
+        <CartRow>
+          <CartButton>
+            <AntDesign name="shoppingcart" size={24} color="black" />
+            <CartText>{`${cart.products.reduce(
+              (acc, cur) => acc + cur.amount,
+              0
+            )} itens no carrinho`}</CartText>
+          </CartButton>
+        </CartRow>
+      )}
     </Container>
   );
 };
