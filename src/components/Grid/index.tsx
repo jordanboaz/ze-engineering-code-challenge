@@ -45,7 +45,6 @@ const Grid = (props: Props) => {
   };
 
   const renderIcon = (icon: ItemType['icon']) => {
-    console.log(icon);
     let iconToRender = <></>;
     switch (icon) {
       case 'Cervejas':

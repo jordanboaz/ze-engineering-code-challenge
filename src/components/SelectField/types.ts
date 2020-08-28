@@ -13,4 +13,5 @@ interface Location {
 export interface Props {
   data: Item[];
   onPress: Function;
+  icon?: Function;
 }

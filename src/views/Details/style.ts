@@ -46,6 +46,16 @@ const BigTitle = styled(Text)`
   font-weight: bold;
 `;
 
+const QuantityInfo = styled(View)`
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+`;
+
+const Quantity = styled(Text)`
+  color: red;
+`;
+
 export {
   Container,
   HeaderContainer,
@@ -55,4 +65,6 @@ export {
   TitleContainer,
   Title,
   BigTitle,
+  QuantityInfo,
+  Quantity,
 };

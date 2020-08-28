@@ -1,16 +1,23 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { ScrollView, View, Animated } from 'react-native';
+import { ScrollView, View, Animated, Text } from 'react-native';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import {
   Container,
   Content,
   HeaderAbsolute,
   HeaderPaint,
+  HeaderInfo,
+  InfoContainer,
+  InfoContent,
+  BackArrowContainer,
+  Label,
+  AddressInfo,
   CartRow,
   CartButton,
   CartText,
   Divider,
+  headerHeight,
 } from './style';
 import { useSelector } from 'react-redux';
 import { Poc, Product, ProductVariants, Category } from '../../types';
@@ -22,23 +29,37 @@ import FilterComponent from '../../components/Grid';
 import Trail from '../../components/Trail';
 import SearchBar from '../../components/SearchBar';
 import { Props } from './types';
-import Splash from '../../assets/splash.png';
 import theme from '../../theme';
 const mockCarroussel = [
-  { id: 1, img: Splash },
-  { id: 2, img: Splash },
-  { id: 3, img: Splash },
-  { id: 4, img: Splash },
+  {
+    id: 1,
+    img:
+      'https://www.sciencenews.org/wp-content/uploads/2020/05/050620_mt_beer_feat-1028x579.jpg',
+  },
+  {
+    id: 2,
+    img:
+      'https://i1.wp.com/www.wine.com.br/winepedia/wp-content/uploads/2017/07/iStock-516799356.jpg?fit=1254%2C836&ssl=1',
+  },
+  {
+    id: 3,
+    img:
+      'https://es1-ladleandspricell.netdna-ssl.com/wp-content/uploads/2014/01/blue-margarita-680.jpg',
+  },
+  {
+    id: 4,
+    img:
+      'https://www.thespruceeats.com/thmb/OevcAqV-nURBs51XZpzg5gVp5rE=/3870x2580/filters:fill(auto,1)/vodka-martini-recipe-760983-Hero-5bd771cd4cedfd0026121758.jpg',
+  },
 ];
 
 const Home = (props: Props) => {
   const [searchProduct, setSearchProduct] = useState('');
+  const [currentLocation, setCurrentLocation] = useState('');
   const [trailsList, setTrailsList] = useState<
     { title: string; products: Product[] }[] | never
   >([]);
   const cart = useSelector((state) => state.cart);
-
-  console.log(cart);
 
   const scrollAnimated = new Animated.Value(0);
 
@@ -61,8 +82,8 @@ const Home = (props: Props) => {
   // console.log('got id', loadingPoc, pocData);
 
   useEffect(() => {
-    const { location } = props.route.params.address;
-
+    const { location, subtitle } = props.route.params.address;
+    setCurrentLocation(subtitle);
     getAddress({
       variables: {
         algorithm: 'NEAREST',
@@ -122,7 +143,6 @@ const Home = (props: Props) => {
 
   const onSelectProduct = (product: Product) => {
     props.navigation.navigate('Details', { product: product });
-    console.log('selected', product);
   };
 
   const renderTrailsList = () => {
@@ -146,7 +166,15 @@ const Home = (props: Props) => {
 
   return (
     <Container>
-      <HeaderAbsolute>
+      <HeaderAbsolute
+        style={{
+          height: scrollAnimated.interpolate({
+            inputRange: [0, theme.size.screenHeigth * 0.2],
+            outputRange: [headerHeight, theme.size.screenHeigth * 0.08],
+            extrapolate: 'clamp',
+          }),
+        }}
+      >
         <HeaderPaint
           style={{
             opacity: scrollAnimated.interpolate({
@@ -156,9 +184,40 @@ const Home = (props: Props) => {
             }),
           }}
         />
-        <View style={{ padding: 16, paddingTop: 32 }}>
-          <SearchBar value={searchProduct} onChangeText={setSearchProduct} />
-        </View>
+
+        {/* <View style={{ padding: 16, paddingTop: 32 }}> */}
+        <HeaderInfo>
+          <InfoContainer
+            style={{
+              opacity: scrollAnimated.interpolate({
+                inputRange: [0, theme.size.screenHeigth * 0.2],
+                outputRange: [1, 0],
+                extrapolate: 'clamp',
+              }),
+              height: scrollAnimated.interpolate({
+                inputRange: [0, theme.size.screenHeigth * 0.2],
+                outputRange: [50, 0],
+                extrapolate: 'clamp',
+              }),
+            }}
+          >
+            <InfoContent>
+              <Label>Receber agora em:</Label>
+              <AddressInfo numberOfLines={1}>{currentLocation}</AddressInfo>
+            </InfoContent>
+            <BackArrowContainer onPress={props.navigation.goBack}>
+              <AntDesign name="down" size={24} color="white" />
+            </BackArrowContainer>
+          </InfoContainer>
+
+          <SearchBar
+            icon={() => <Ionicons name="ios-search" size={24} color="black" />}
+            placeholder="Filtrar por produto"
+            value={searchProduct}
+            onChangeText={setSearchProduct}
+          />
+        </HeaderInfo>
+        {/* </View> */}
       </HeaderAbsolute>
       <Content onScroll={onScroll} scrollEventThrottle={16}>
         <Carroussel data={mockCarroussel} />
@@ -177,7 +236,7 @@ const Home = (props: Props) => {
           <CartButton>
             <AntDesign name="shoppingcart" size={24} color="black" />
             <CartText>{`${cart.products.reduce(
-              (acc, cur) => acc + cur.amount,
+              (acc: number, cur) => acc + cur.amount,
               0
             )} itens no carrinho`}</CartText>
           </CartButton>

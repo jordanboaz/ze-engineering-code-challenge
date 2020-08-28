@@ -6,6 +6,7 @@ import {
   // IconContainer,
   // SearchBar,
 } from './style';
+import { EvilIcons } from '@expo/vector-icons';
 import { Geocoder } from '../../services/geoCoderservice';
 import theme from '../../theme';
 import SelectField from '../../components/SelectField';
@@ -80,6 +81,7 @@ const Presentation = (props: Props) => {
         onChangeText={onChangeSearch}
         onFocus={animateHeaderToTop}
         value={searchField}
+        icon={() => <EvilIcons name="location" size={24} color="black" />}
         placeholder="Inserir endereço com número"
         animation={{
           transform: [
@@ -92,7 +94,11 @@ const Presentation = (props: Props) => {
           ],
         }}
       />
-      <SelectField data={addresses} onPress={onSelectAddress} />
+      <SelectField
+        data={addresses}
+        icon={() => <EvilIcons name="location" size={24} color="black" />}
+        onPress={onSelectAddress}
+      />
     </Container>
   );
 };

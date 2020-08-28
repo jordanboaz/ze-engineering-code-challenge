@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Animated } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
@@ -12,7 +12,7 @@ const Toast = () => {
 
   const showAnimated = new Animated.Value(0);
 
-  useEffect(() => {
+  const animate = useCallback(() => {
     if (toast.show) {
       Animated.timing(showAnimated, {
         toValue: 1,
@@ -36,6 +36,9 @@ const Toast = () => {
         useNativeDriver: false,
       }).start(() => {});
     }
+  }, [toast.show]);
+  useEffect(() => {
+    animate();
   }, [toast.show]);
 
   const renderIcon = () => {

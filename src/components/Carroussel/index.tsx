@@ -16,7 +16,7 @@ const Carroussel = (props: Props) => {
       return data.map((eachItem) => {
         return (
           <BoxContainer key={eachItem.id}>
-            <ImageBox source={eachItem.img} />
+            <ImageBox source={{ uri: eachItem.img }} />
           </BoxContainer>
         );
       });

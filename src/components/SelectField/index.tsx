@@ -14,9 +14,7 @@ const SelectField = (props: Props) => {
   const renderItem = ({ item }: { item: ItemType }) => {
     return (
       <Item onPress={() => props.onPress(item)}>
-        <IconContainer>
-          <></>
-        </IconContainer>
+        <IconContainer>{props.icon ? props.icon() : <></>}</IconContainer>
         <TextContainer>
           <Title numberOfLines={1}>{item.title}</Title>
           <Subtitle numberOfLines={1}>{item.subtitle}</Subtitle>

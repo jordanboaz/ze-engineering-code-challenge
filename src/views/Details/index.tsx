@@ -4,7 +4,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { showToast } from '../../store/actions/toast';
 import ProductControl from '../../components/ProductControl';
 import ProductViewer from '../../components/ProductViewer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '../../store/actions/cart';
 import { Props } from './types';
 import { Product } from '../../types';
@@ -18,10 +18,13 @@ import {
   TitleContainer,
   Title,
   BigTitle,
+  QuantityInfo,
+  Quantity,
 } from './style';
 
 const Details = (props: Props) => {
   const [product] = useState<Product>(props.route.params.product);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const onSubmit = (amount: any) => {
@@ -35,6 +38,18 @@ const Details = (props: Props) => {
     dispatch(
       showToast({ message: 'Produto adicionado com sucesso', icon: 'success' })
     );
+  };
+
+  const renderQuantity = () => {
+    const productInCart = cart.products.find((p) => p.id === product.id);
+    if (productInCart) {
+      return (
+        <QuantityInfo>
+          <Quantity>{`${productInCart.amount} no seu carrinho`}</Quantity>
+        </QuantityInfo>
+      );
+    }
+    return <></>;
   };
   return (
     <Container>
@@ -61,6 +76,8 @@ const Details = (props: Props) => {
         price={product.productVariants[0].price}
         onSubmit={onSubmit}
       />
+
+      {renderQuantity()}
     </Container>
   );
 };
