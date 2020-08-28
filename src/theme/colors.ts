@@ -6,12 +6,18 @@ const grey = {
 };
 
 const yellow = {
-  zero: '#FFCC00'
-}
+  zero: '#FFCC00',
+};
+
+const blue = {
+  zero: '#1b91f7',
+  one: '#bee0fd',
+};
 
 const colors = {
   grey,
-  yellow
+  yellow,
+  blue,
 };
 
 export { colors };
