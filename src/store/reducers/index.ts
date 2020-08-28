@@ -1,3 +1,4 @@
-import { cart} from './cart'
+import { cart } from './cart';
+import { toast } from './toast';
 
-export { cart} 
+export { cart, toast };
