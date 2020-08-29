@@ -7,10 +7,13 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { store } from './src/store';
 import Router from './src/routes';
 import Toast from './src/components/Toast';
+import getEnvVars from './env';
+
+const { apiUrl } = getEnvVars();
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: 'https://api.code-challenge.ze.delivery/public/graphql',
+  uri: apiUrl,
 });
 
 export default function App() {

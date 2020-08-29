@@ -67,7 +67,6 @@ const Presentation = (props: Props) => {
   };
 
   const onSelectAddress = (addressSelected: addressType) => {
-    console.log(addressSelected);
     props.navigation.navigate('Home', { address: addressSelected });
   };
 
