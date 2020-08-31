@@ -91,7 +91,7 @@ const Presentation = (props: Props) => {
         onFocus={animateHeaderToTop}
         value={searchField}
         icon={() => <EvilIcons name="location" size={24} color="black" />}
-        placeholder="Inserir endereço com número"
+        placeholder="Inserir endereço com número ."
         animation={{
           transform: [
             {

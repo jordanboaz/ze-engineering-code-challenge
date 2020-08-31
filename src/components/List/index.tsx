@@ -23,14 +23,6 @@ const List = (props: Props) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
-  const onPropsIncrease = (item) => {
-    dispatch(increaseAmount(item.id));
-  };
-
-  const onPropsDecrease = (item) => {
-    dispatch(decreaseAmount(item.id));
-  };
-
   const renderItems = (items) => {
     return items.map((item) => {
       return (
@@ -40,8 +32,8 @@ const List = (props: Props) => {
             <Title>{item.title}</Title>
             <Price>R$ {item.price}</Price>
             <Control
-              onPropsIncrease={() => onPropsIncrease(item)}
-              onPropsDecrease={() => onPropsDecrease(item)}
+              onPropsIncrease={() => dispatch(increaseAmount(item.id))}
+              onPropsDecrease={() => dispatch(decreaseAmount(item.id))}
               onChangeValue={() => {}}
               unit={item.amount}
             />

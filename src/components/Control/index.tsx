@@ -9,31 +9,31 @@ import { Props } from './types';
 import theme from '../../theme';
 
 const ProductControl = (props: Props) => {
-  const [value, setValue] = useState(props.unit || 1);
+  const [value, setValue] = useState(parseInt(props.unit) || 1);
 
   useEffect(() => {
-    props.onChangeValue(value);
+    props.onChangeValue(parseInt(value));
   }, [value]);
 
   useEffect(() => {
-    setValue(Number(props.unit));
+    setValue(parseInt(props.unit));
   }, [props.unit]);
 
   const onChangeValue = (input: string) => {
-    setValue(Number(input));
+    setValue(parseInt(input));
   };
 
   const onIncrease = () => {
-    props.onPropsIncrease();
+    props.onPropsIncrease && props.onPropsIncrease();
 
-    setValue((value) => value + 1);
+    setValue((value) => parseInt(value) + 1);
   };
 
   const onDecrease = () => {
     if (value > 1) {
-      props.onPropsDecrease();
+      props.onPropsDecrease && props.onPropsDecrease();
 
-      setValue((value) => value - 1);
+      setValue((value) => parseInt(value) - 1);
     }
   };
   return (
