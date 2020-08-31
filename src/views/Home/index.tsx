@@ -78,9 +78,6 @@ const Home = (props: Props) => {
     getPoc
   );
 
-  // console.log('got address', dataAddress, loadingAddress);
-  // console.log('got id', loadingPoc, pocData);
-
   useEffect(() => {
     const { location, subtitle } = props.route.params.address;
     setCurrentLocation(subtitle);
@@ -137,9 +134,6 @@ const Home = (props: Props) => {
       setTrailsList(categoriesWithProducts);
     }
   }, [pocData, dataCategories]);
-
-  // console.log(loadingCategories, errorCategories, categoriesData);
-  // console.log(loadingAddress, errorAddress, addresspocData);
 
   const onSelectProduct = (product: Product) => {
     props.navigation.navigate('Details', { product: product });

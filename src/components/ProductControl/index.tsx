@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import {
   Container,
-  ControlsContainer,
-  ControlButton,
-  ControlLabel,
-  ControlValue,
   UnitsControlContainer,
   Unit,
   UnitText,
@@ -40,16 +36,6 @@ const ProductControl = (props: Props) => {
   const selectUnit = (eachUnit: number, index: number) => {
     setUnitedSelect(index);
     setValue(eachUnit);
-  };
-
-  const onIncrease = () => {
-    setValue((value) => value + 1);
-  };
-
-  const onDecrease = () => {
-    if (value > 1) {
-      setValue((value) => value - 1);
-    }
   };
 
   return (
