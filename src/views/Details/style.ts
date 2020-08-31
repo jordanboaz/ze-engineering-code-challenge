@@ -53,7 +53,7 @@ const QuantityInfo = styled(View)`
 `;
 
 const Quantity = styled(Text)`
-  color: red;
+  color: ${theme.colors.grey.three};
 `;
 
 export {

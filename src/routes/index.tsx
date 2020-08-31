@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Presentation, Home, Details } from '../views';
+import { Presentation, Home, Details, Cart } from '../views';
 const Stack = createStackNavigator();
 
 function Route() {
@@ -12,6 +12,7 @@ function Route() {
         <Stack.Screen name="Presentation" component={Presentation} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen name="Cart" component={Cart} />
       </Stack.Navigator>
     </NavigationContainer>
   );

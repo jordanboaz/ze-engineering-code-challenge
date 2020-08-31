@@ -13,4 +13,5 @@ export type RootStackParamList = {
   Details: {
     product: Product;
   };
+  Cart: undefined;
 };

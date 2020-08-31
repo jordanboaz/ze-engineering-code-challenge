@@ -145,6 +145,10 @@ const Home = (props: Props) => {
     props.navigation.navigate('Details', { product: product });
   };
 
+  const navigateToCart = () => {
+    props.navigation.navigate('Cart');
+  };
+
   const renderTrailsList = () => {
     return trailsList.map((eachTrail) => {
       return (
@@ -233,7 +237,7 @@ const Home = (props: Props) => {
       </Content>
       {cart?.products?.length > 0 && (
         <CartRow>
-          <CartButton>
+          <CartButton onPress={navigateToCart}>
             <AntDesign name="shoppingcart" size={24} color="black" />
             <CartText>{`${cart.products.reduce(
               (acc: number, cur) => acc + cur.amount,

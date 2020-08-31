@@ -33,6 +33,7 @@ const Details = (props: Props) => {
       id: product.id,
       title: product.title,
       image: product.images[0].url,
+      price: product.productVariants[0].price,
     };
     dispatch(addProduct(productToAdd));
     dispatch(
@@ -40,12 +41,18 @@ const Details = (props: Props) => {
     );
   };
 
+  const navigateToCart = () => {
+    props.navigation.navigate('Cart');
+  };
+
   const renderQuantity = () => {
     const productInCart = cart.products.find((p) => p.id === product.id);
     if (productInCart) {
       return (
         <QuantityInfo>
-          <Quantity>{`${productInCart.amount} no seu carrinho`}</Quantity>
+          <Quantity
+            onPress={navigateToCart}
+          >{`${productInCart.amount} no seu carrinho`}</Quantity>
         </QuantityInfo>
       );
     }
