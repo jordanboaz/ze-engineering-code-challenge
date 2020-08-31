@@ -13,6 +13,7 @@ import {
 } from './style';
 import { Props } from './types';
 import theme from '../../theme';
+import Control from '../Control';
 
 const ProductControl = (props: Props) => {
   const [value, setValue] = useState(1);
@@ -28,21 +29,11 @@ const ProductControl = (props: Props) => {
 
   const renderControls = (key: number) => {
     return (
-      <ControlsContainer key={key}>
-        <ControlButton onPress={onDecrease}>
-          <ControlLabel>-</ControlLabel>
-        </ControlButton>
-        <ControlValue
-          value={String(value)}
-          onChangeText={onChangeValue}
-          keyboardType="numeric"
-        />
-        <ControlButton onPress={onIncrease}>
-          <ControlLabel style={{ color: theme.colors.yellow.zero }}>
-            +
-          </ControlLabel>
-        </ControlButton>
-      </ControlsContainer>
+      <Control
+        key={key}
+        onChangeValue={onChangeValue}
+        unit={units[unitSelected]}
+      />
     );
   };
 
