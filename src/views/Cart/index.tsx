@@ -8,7 +8,6 @@ const Cart = (props: Props) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  console.log(cart);
   return (
     <Container>
       <HeaderContainer>
