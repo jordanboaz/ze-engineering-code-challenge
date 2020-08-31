@@ -6,6 +6,8 @@ interface ProductDispatch {
   title: string;
 }
 
+const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
+
 const SHOW_TOAST = 'SHOW_TOAST';
 const HIDE_TOAST = 'HIDE_TOAST';
 interface ToastState {
@@ -14,4 +16,16 @@ interface ToastState {
   icon: string | null;
 }
 
-export { ADD_PRODUCT, ProductDispatch, SHOW_TOAST, HIDE_TOAST, ToastState };
+const DECREASE_AMOUNT = 'DECREASE_AMOUNT';
+const INCREASE_AMOUNT = 'INCREASE_AMOUNT';
+
+export {
+  DECREASE_AMOUNT,
+  INCREASE_AMOUNT,
+  ADD_PRODUCT,
+  REMOVE_PRODUCT,
+  ProductDispatch,
+  SHOW_TOAST,
+  HIDE_TOAST,
+  ToastState,
+};
